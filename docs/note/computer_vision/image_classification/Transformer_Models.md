@@ -57,9 +57,13 @@
   - SAM strives to find a solution whose entire neighborhood has low losses rather than focus on any singleton point
   - SAM incurs another round of forward and backward propagations to update , which will lead to around 2x computational cost per update 
 
-### Which Transformer to Favor: A Comparative Analysis of Efficiency in Vision Transformers
+### Training Vision Transformers with Only 2040 Images
 
-## Data Efficient Image Transformet (DeiT)
+## Data Efficient Image Transformers (DeiT)
+
+### Training Data-Efficient Image Transformers & Distillation Through Attention
+
+### DeiT III: Revenge of the ViT
 
 ## MobileViT
 

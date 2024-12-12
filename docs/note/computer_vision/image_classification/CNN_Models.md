@@ -1,8 +1,16 @@
 # CNN Models
 
-
-
 ## ResNet & ResNetV2
+
+<figure markdown="span">
+  ![resnet_v1v2_comparison](./media/resnet_v1v2_comparison.png){ width="300" }
+  <figcaption>ResNetV1 and ResNetV2</figcaption>
+</figure>
+
+The major differences between ResNetV1 and ResNetV2 are as follows:
+
+- ResNetV1 adds the second non-linearity after the addition operation is performed between the $\textbf{x}$ and $\textbf{F(x)}$. ResNetV2 has removed the last non-linearity, thus clearing the path of the input to output in the form of identity connection.
+- ResNetV2 applies Batch Normalization and ReLU activation to the input before the multiplication with the weight matrix (convolution operation). ResNetV1 performs the convolution followed by Batch Normalization and ReLU activation.
 
 ## MobileNet
 
