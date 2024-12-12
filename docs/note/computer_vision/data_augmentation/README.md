@@ -1,3 +1,4 @@
 # Data Augmentation
 
+- MixUp
 - RandAugment
