@@ -1,11 +1,14 @@
 # CNN Models
 
-## ResNet & ResNetV2
+## ResNet
 
-<figure markdown="span">
-  ![resnet_v1v2_comparison](./media/resnet_v1v2_comparison.png){ width="300" }
-  <figcaption>ResNetV1 and ResNetV2</figcaption>
-</figure>
+### Deep Residual Learning for Image Recognition
+
+### Identity Mappings in Deep Residual Networks
+
+<div style="text-align: center;">
+    <img src="./media/resnet_v1v2_comparison.png" alt="resnet_v1v2_comparison" height="300">
+</div>
 
 The major differences between ResNetV1 and ResNetV2 are as follows:
 
@@ -17,8 +20,8 @@ The major differences between ResNetV1 and ResNetV2 are as follows:
 ### MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications
 
 - Designed for mobile devices
-- Depthwise Separable Convolutions: achieves high accuracy while minimizng computational overhead
-- Channel-wise Linear Bottleneck Layers: help to further reduce the number of parameters and computational cost while maintaining high accuracy
+- **Depthwise Separable Convolutions:** achieves high accuracy while minimizng computational overhead
+- **Channel-wise Linear Bottleneck Layers:** help to further reduce the number of parameters and computational cost while maintaining high accuracy
 
 #### Depthwise Separable Convolutions
 
@@ -46,7 +49,7 @@ The major differences between ResNetV1 and ResNetV2 are as follows:
 - Same as a standard convolution, except using a $1 \times 1$ kernel
 - Adds up the channels from depthwise convolution as a weighted sum
 
-### Channel-wise Linear Bottleneck Layers
+#### Channel-wise Linear Bottleneck Layers
 
 **3 main operations applied sequentially:**
 
@@ -54,12 +57,9 @@ The major differences between ResNetV1 and ResNetV2 are as follows:
 2. **Batch normalization**: This operation normalizes the activation values across each channel, helping to stabilize the training process and improve generalization performance
 3. **Activation function**: Typically, a ReLU (Rectified Linear Unit) activation function is used after batch normalization to introduce non-linearity in the network
 
-## Mobile-Former
+### MobileNetV2: Inverted Residuals and Linear Bottlenecks
 
-### Mobile-Former: Bridging MobileNet and Transformer
-
-1. Use MobileNet as a feature extractor, then fed into a transformer model
-2. Training MobileNet and ViT separately and then combining their predictions through ensemble techniques
+### Searching for MobileNetV3
 
 ## DenseNet
 
@@ -69,13 +69,86 @@ The major differences between ResNetV1 and ResNetV2 are as follows:
 
 ## ResNeXt
 
+### Aggregated Residual Transformations for Deep Neural Networks
+
+## RegNet
+
 ## NASNet
 
 ## InceptionNet
 
-## InceptionResNet
-
 ## ConvNeXt
 
-- A significatnt improvement to pure convolution models by incorporating techniques inspired by ViTs and achieving results comparable to ViTs in accuracy and scalability
-- TO-DO
+### A ConvNet for the 2020s
+
+#### Introduction
+
+- Without the ConvNet inductive biases, a vanilla ViT's global attention has a quadratic complexity with respect to the input size
+- Hierachical Transformers, e.g. Swin Transformer's "sliding-window" strategy (e.g. attention within local windows) revealed that: **The essence of convolution is not becoming irrelevant; rather, it remains much desired and has never faded**
+
+#### Training Techniques
+
+Inspired by DeiT and Swin Transformers:
+
+1. **Epochs:** from 90 epochs to 300 epochs
+2. **Optimizer:** AdamW optimizer instead of Adam optimizer, which differs in how it handles weight decay
+3. **Data augmentation:** Mixup, Cutmix, RandAugment, Random Erasing
+4. **Regularization:** Stochastic Depth and Label Smoothing
+
+This enhanced training recipe increased the performance of the ResNet50 model from 76.1% to 78.8%, implying that a significant portion of the performance difference between traditional ConvNets and vision Transformers may be due to the training techniques
+
+#### Macro Design
+
+Swin Transformers follow ConvNets and use a multi-stage design, where each stage has a different feature map resolution
+
+1. **Changing stage compute ratio**
+   1. ResNet50 has 4 main stages with (3,4,6,3) blocks: a compute ratio of 3:4:6:3
+   2. To follow Swin Transformer's compute ratio of 1:1:3:1, ConvNeXt adjusted the number of blocks on each stage of ResNet50 from (3,4,6,3) to (3,3,9,3)
+   3. Changing the stage compute ratio improves the model accuracy from 78.8% to 79.4%
+2. **Changing stem to "Patchify"**
+   1. The "stem" cell dictates how the input images will be processes at the network's beginning
+   2. Due to the redundancy inherent in natural images, a common stem cell will aggresively downsample the input images to an appropriate feature map size in both standard ConvNets and ViTs
+   3. At the start of ResNet, the input is fed to a stem of $7 \times 7$ convolution layer with stride 2, followed by a max pool, used to downsample the image by a factor of 4
+   4. Substiting the stem with a convolutional layer featuring a $4 \times 4$ kernel size and a stride of 4 is more effective, effectively convolving them through non-overlapping $4 \times 4$ patches
+   5. Patchify serves the same purpose of downsampling the image by a factor of 4 while reducing the number of layers, it slightly improves the model accuracy from 79.4% to 79.5%
+
+#### ResNeXt-ify
+
+- ResNeXt demonstrates an improved trade-off between the number of floating-point (FLOPs) and accuracy compared to a standard ResNet
+- The core component is grouped convolution, where the convolutional filters are separated into different groups
+- ConvNeXt uses depthwise convolution, a special case of grouped convolution where the number of groups equals the number of channels
+- Depthwise convolution is similar to the weighted sum operation in self-attention, which operates on a per-channel basis, i.e. only mixing information in the spatial dimension
+- Depthwise convolution reduces the network FLOPs and the accuracy
+- Following ResNeXt, ConvNeXt increases the network width from 64 to 96, the same number of channels as Swin-T
+- This modification improves the model accuracy from 79.5% to 80.5%
+
+#### Inverted Bottleneck
+
+<div style="text-align: center;">
+    <img src="./media/convnext_block.png" alt="convnext_block" height="500">
+</div>
+
+- An important aspect of the Transformer block is the inverted bottleneck, i.e. the hidden dimension of the MLP block is four times wider than the input dimension
+- Despite the increased FLOPs for the depthwise convolution layer, the inverted bottleneck design reduces the whole ConvNeXt network FLOPs to 4.6G
+- Slightly improves the performance from 80.5% to 80.6%
+
+#### Larger Kernel Size
+
+<div style="text-align: center;">
+    <img src="./media/convnext_block_2.png" alt="convnext_block_2" height="300">
+</div>
+
+- ViT's non-local self-attention allows a broader receptive field of image features
+- Swin Transformers' attention block window size is set to at least $7 \times 7$, surpassing the $3 \times 3$ kernel size of ResNeXt
+- **Move up the depthwise convolution layer**
+- The repositioning enables the $1 \times 1$ layers to efficiently handle computational tasks, while the depthwise convolution layer functions as a more non-local receptor
+- By using a larger kernel size, ConvNeXt's performance increases from 79.9% ($3 \times 3$) to 80.6 ($7 \times 7$)
+
+#### Micro Design
+
+1. **Activation:** Replacing ReLU with GELU, and eliminating all GELU layers from the residual block except for one between two $1 \times 1$ layers
+2. **Normalization:** Fewer normalization layers by removing two BatchNorm layers, and substituting BatchNorm with LayerNorm, leaving only one LayerNorm layer before the conv $1 \times 1$ layers
+3. **Downsampling Layer:** Add a separate downsample layer in between ResNet stages
+
+- These modifications improve the ConvNeXt accuracy from 80.6% to 82.0%
+- The final ConvNeXt model exceeds Swin Transformer's accuracy of 81.3%

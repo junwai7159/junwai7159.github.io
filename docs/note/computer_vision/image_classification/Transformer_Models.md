@@ -59,11 +59,20 @@
 
 ### Training Vision Transformers with Only 2040 Images
 
+1. Self-supervised pretraining: parametric instance discrimination
+2. Supervised fine-tuning
+
 ## Data Efficient Image Transformers (DeiT)
 
 ### Training Data-Efficient Image Transformers & Distillation Through Attention
 
 ### DeiT III: Revenge of the ViT
+
+## DINO
+
+- Self-distillation with no labels
+
+### Emerging Properties in Self-Supervised Vision Transformers
 
 ## MobileViT
 
@@ -103,3 +112,10 @@
 ## Tokens-to-Token ViT (T2T-ViT)
 
 ## Pyramid Vision Transformer (PVT)
+
+## Mobile-Former
+
+### Mobile-Former: Bridging MobileNet and Transformer
+
+1. Use MobileNet as a feature extractor, then fed into a transformer model
+2. Training MobileNet and ViT separately and then combining their predictions through ensemble techniques
