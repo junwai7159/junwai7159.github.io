@@ -31,7 +31,9 @@ export default function Home(): JSX.Element {
             <HeroSvg />
           </Slide>
         </section>
-        <GithubCalendarComponent />
+        <section className="w-full overflow-x-auto">
+          <GithubCalendarComponent />
+        </section>
       </main>
     </Layout>
 
