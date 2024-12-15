@@ -102,12 +102,12 @@ const config: Config = {
         },
         {
           to: '/docs/project', 
-          label: 'Project', 
+          label: 'Projects', 
           position: 'left'
         },
         {
           to: '/docs/note', 
-          label: 'Note', 
+          label: 'Notes', 
           position: 'left'
         },
         {
@@ -121,55 +121,21 @@ const config: Config = {
           position: 'left'
         },
         {
-          href: 'https://github.com/facebook/docusaurus',
-          label: 'GitHub',
-          position: 'right',
-        },
+					'aria-label': 'Linkedin',
+					'className': 'navbar--linkedin-link',
+					'href': 'https://github.com/junwai7159',
+					'position': 'right',
+				},
+				{
+					'aria-label': 'GitHub Repository',
+					'className': 'navbar--github-link',
+					'href': 'https://github.com/junwai7159',
+					'position': 'right',
+				},
       ],
     },
     footer: {
-      style: 'dark',
-      links: [
-        // {
-        //   title: 'Docs',
-        //   items: [
-        //     {
-        //       label: 'Tutorial',
-        //       to: '/docs/intro',
-        //     },
-        //   ],
-        // },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
-            },
-          ],
-        },
-      ],
+      style: 'light',
       copyright: `Copyright © ${new Date().getFullYear()} Chiang Jun Wai. Built with Docusaurus.`,
     },
     prism: {

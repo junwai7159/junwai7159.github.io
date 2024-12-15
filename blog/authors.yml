@@ -1,23 +1,9 @@
-yangshun:
-  name: Yangshun Tay
-  title: Front End Engineer @ Facebook
-  url: https://github.com/yangshun
-  image_url: https://github.com/yangshun.png
+junwai:
+  name: Chiang Jun Wai
+  title: Junior AI Engineer
+  url: https://github.com/junwai7159
+  image_url: https://portfolio-eight-nu-33.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fcptbi55a%2Fproduction%2F121d9d6f7115cc8a4eab57b928df329bf2799ad8-500x500.gif&w=640&q=100
   page: true
   socials:
-    x: yangshunz
-    github: yangshun
+    github: junwai7159
 
-slorber:
-  name: Sébastien Lorber
-  title: Docusaurus maintainer
-  url: https://sebastienlorber.com
-  image_url: https://github.com/slorber.png
-  page:
-    # customize the url of the author page at /blog/authors/<permalink>
-    permalink: '/all-sebastien-lorber-articles'
-  socials:
-    x: sebastienlorber
-    linkedin: sebastienlorber
-    github: slorber
-    newsletter: https://thisweekinreact.com

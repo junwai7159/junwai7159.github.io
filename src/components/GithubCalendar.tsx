@@ -3,7 +3,7 @@ import { Slide } from "../animation/Slide";
 
 export default function GithubCalendarComponent() {
   return (
-    <section>
+    <section className="mb-20">
       <Slide delay={0.16} className="mb-8">
         <h2 className="font-incognito text-4xl font-bold tracking-tight">
           Contribution Graph
