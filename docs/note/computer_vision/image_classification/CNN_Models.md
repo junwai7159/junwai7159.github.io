@@ -6,8 +6,8 @@
 
 ### Identity Mappings in Deep Residual Networks
 
-<div style={{ textAlign: "center" }}>
-    <img src="./media/resnet_v1v2_comparison.png" alt="resnet_v1v2_comparison" height="300" />
+<div style="text-align: center;">
+    <img src="./media/resnet_v1v2_comparison.png" alt="resnet_v1v2_comparison" height="300">
 </div>
 
 The major differences between ResNetV1 and ResNetV2 are as follows:
@@ -124,8 +124,8 @@ Swin Transformers follow ConvNets and use a multi-stage design, where each stage
 
 #### Inverted Bottleneck
 
-<div style={{ textAlign: "center" }}>
-    <img src="./media/convnext_block.png" alt="convnext_block" height="500" />
+<div style="text-align: center;">
+    <img src="./media/convnext_block.png" alt="convnext_block" height="500">
 </div>
 
 - An important aspect of the Transformer block is the inverted bottleneck, i.e. the hidden dimension of the MLP block is four times wider than the input dimension
@@ -134,8 +134,8 @@ Swin Transformers follow ConvNets and use a multi-stage design, where each stage
 
 #### Larger Kernel Size
 
-<div style={{ textAlign: "center" }}>
-    <img src="./media/convnext_block_2.png" alt="convnext_block_2" height="300" />
+<div style="text-align: center;">
+    <img src="./media/convnext_block_2.png" alt="convnext_block_2" height="300">
 </div>
 
 - ViT's non-local self-attention allows a broader receptive field of image features
@@ -152,3 +152,40 @@ Swin Transformers follow ConvNets and use a multi-stage design, where each stage
 
 - These modifications improve the ConvNeXt accuracy from 80.6% to 82.0%
 - The final ConvNeXt model exceeds Swin Transformer's accuracy of 81.3%
+
+## VAN
+
+### Visual Attention Network
+
+#### Introduction
+
+Applying self-attention in computer vision is challenging:
+1. Treating images as 1D sequences neglects their 2D structures
+2. The quadratic complecity is too expensive for high-resolution images
+3. It only captures spatial adaptability but ignores channel adaptability
+
+#### Large Kernel Attention (LKA)
+
+![lka](./media/lka.png)
+
+- Enable self-adaptive and long-range correlations in self-attention while avoiding its short-comings
+- A large kernel convolution operation is decomposed to capture long-range relationship
+- Specifically a $K \times K$ convolution is decomposed into a $\left\lceil \frac{K}{d} \times \frac{K}{d} \right\rceil$ depth-wise dilation convolution with dilation $d$, a $(2d-1) \times (2d-1)$ depth-wise convolution and a $1 \times 1$ convolution
+
+LKA Module:
+
+$$Attention = \text{Conv}_{1 \times 1}(\text{DW-D-Conv(DW-Conv(F))})$$
+
+$$Output = Attention \otimes F$$
+
+- $F \in \mathbb{R}^{C \times H \times W}$ is the input feature
+- $Attention \in \mathbb{R}^{C \times H \times W}$ denotes attention map
+
+![lka2](./media/lka2.png)
+
+#### Visual Attention Network (VAN)
+
+![van](./media/van.png)
+
+- Simple hierarchical strucure, i.e. a sequence of four stages with decreasing output spatial resolution
+- With the decreasing of resolution, the number of output channels is increasing

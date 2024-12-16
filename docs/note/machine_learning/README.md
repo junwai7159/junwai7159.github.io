@@ -8,5 +8,6 @@ Concepts:
 - Learning rate scheduler (cosine)
 - warmup
 - different optimizers
+- Exponential moving average(EMA)
 - Restricted Boltzmann machine
 - Hidden Markov Models (HMM), Conditional Random Fields (CRF),
