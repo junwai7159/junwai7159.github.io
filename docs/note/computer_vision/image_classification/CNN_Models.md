@@ -6,7 +6,7 @@
 
 ### Identity Mappings in Deep Residual Networks
 
-<div style={{ "text-align: center" }}>
+<div style={{ text-align: "center" }}>
     <img src="./media/resnet_v1v2_comparison.png" alt="resnet_v1v2_comparison" height="300" />
 </div>
 
@@ -124,7 +124,7 @@ Swin Transformers follow ConvNets and use a multi-stage design, where each stage
 
 #### Inverted Bottleneck
 
-<div style={{ text-align: center }}>
+<div style={{ text-align: "center" }}>
     <img src="./media/convnext_block.png" alt="convnext_block" height="500" />
 </div>
 
@@ -134,7 +134,7 @@ Swin Transformers follow ConvNets and use a multi-stage design, where each stage
 
 #### Larger Kernel Size
 
-<div style={{ "text-align: center" }}>
+<div style={{ text-align: "center" }}>
     <img src="./media/convnext_block_2.png" alt="convnext_block_2" height="300" />
 </div>
 
