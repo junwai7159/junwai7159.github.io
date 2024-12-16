@@ -7,7 +7,7 @@
 ### Identity Mappings in Deep Residual Networks
 
 <div style="text-align: center;">
-    <img src="./media/resnet_v1v2_comparison.png" alt="resnet_v1v2_comparison" height="300">
+    <img src="./media/resnet_v1v2_comparison.png" alt="resnet_v1v2_comparison" height="300" />
 </div>
 
 The major differences between ResNetV1 and ResNetV2 are as follows:
@@ -125,7 +125,7 @@ Swin Transformers follow ConvNets and use a multi-stage design, where each stage
 #### Inverted Bottleneck
 
 <div style="text-align: center;">
-    <img src="./media/convnext_block.png" alt="convnext_block" height="500">
+    <img src="./media/convnext_block.png" alt="convnext_block" height="500" />
 </div>
 
 - An important aspect of the Transformer block is the inverted bottleneck, i.e. the hidden dimension of the MLP block is four times wider than the input dimension
@@ -135,7 +135,7 @@ Swin Transformers follow ConvNets and use a multi-stage design, where each stage
 #### Larger Kernel Size
 
 <div style="text-align: center;">
-    <img src="./media/convnext_block_2.png" alt="convnext_block_2" height="300">
+    <img src="./media/convnext_block_2.png" alt="convnext_block_2" height="300" />
 </div>
 
 - ViT's non-local self-attention allows a broader receptive field of image features
@@ -172,7 +172,7 @@ Applying self-attention in computer vision is challenging:
 - A large kernel convolution operation is decomposed to capture long-range relationship
 - Specifically a $K \times K$ convolution is decomposed into a $\left\lceil \frac{K}{d} \times \frac{K}{d} \right\rceil$ depth-wise dilation convolution with dilation $d$, a $(2d-1) \times (2d-1)$ depth-wise convolution and a $1 \times 1$ convolution
 
-LKA Module:
+**LKA Module:**
 
 $$Attention = \text{Conv}_{1 \times 1}(\text{DW-D-Conv(DW-Conv(F))})$$
 
