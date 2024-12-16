@@ -10,7 +10,7 @@ import tailwindPlugin from './src/plugins/tailwind-config.cjs';
 const config: Config = {
   title: 'Chiang Jun Wai',
   tagline: 'AI/ML Engineer',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/logo.svg',
 
   // Set the production url of your site here
   url: 'https://your-docusaurus-site.example.com',
