@@ -15,6 +15,8 @@ The major differences between ResNetV1 and ResNetV2 are as follows:
 - ResNetV1 adds the second non-linearity after the addition operation is performed between the $\textbf{x}$ and $\textbf{F(x)}$. ResNetV2 has removed the last non-linearity, thus clearing the path of the input to output in the form of identity connection.
 - ResNetV2 applies Batch Normalization and ReLU activation to the input before the multiplication with the weight matrix (convolution operation). ResNetV1 performs the convolution followed by Batch Normalization and ReLU activation.
 
+### Resnet strikes back: An improved training procedure in timm
+
 ## MobileNet
 
 ### MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications
@@ -66,6 +68,10 @@ The major differences between ResNetV1 and ResNetV2 are as follows:
 ## SqueezeNet
 
 ## EfficientNet
+
+### EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks
+
+### EfficientNetV2: Smaller Models and Faster Training
 
 ## ResNeXt
 

@@ -62,13 +62,83 @@
 1. Self-supervised pretraining: parametric instance discrimination
 2. Supervised fine-tuning
 
+TODO
+
+### Vision Transformer for Small-Size Datasets
+
 ## Data Efficient Image Transformers (DeiT)
 
 ### Training Data-Efficient Image Transformers & Distillation Through Attention
 
+#### Hard Distillation
+
+The student tries to recreate the labels predicted by the teacher:
+
+$$\mathcal{L} = \frac{1}{2} \mathcal{L}_{CE}(\text{softmax}(Z_s), y) + \frac{1}{2} \mathcal{L}_{CE}(\text{softmax}(Z_s), y_t)$$
+
+- The first term is similar to soft distillation
+- The second term is the distillation component, it is the cross-entropy loss between the softmax of students and labels of the teacher
+- $y_t$ is the teacher's predicted label
+
+#### Architecture
+
+![deit](./media/deit.webp)
+
+- Add an additional class-type token called distillation token: exactly like the CLS token, it's initialized randomly, is learnable, and has a fixed last position
+- Uses hard distillation
+- At inference time, the authors average the softmax of distillation and CLS token, then passed through softmax + argmax to get better results
+- **The teacher is RegNetY-16GF (84M parameters):** using a **convnet teacher gives better performance** than using a transformer, probably due to the inductive bias inherited by the transformer through distillation
+- **Students outperformed teacher networks**
+
+**The secret sauce: fine-tuning and augmentation:**
+
+- **FixRes strategy:** pretrain on $224 \times 224$, then fine-tune on $384 \times 384$
+- **Data augmentation:** CutMix, MixUp, and RandAugment
+
 ### DeiT III: Revenge of the ViT
 
+#### Training Recipe
+
+The proposed training recipe is based on **ResNet Strikes Back** and **DeiT**
+
+![deit3-recipe](./media/deit3-recipe.png)
+
+#### 3-Augment
+
+**RandAugment** is **widely employed for ViT** while their policy was initially learned for convnets. Given that the architectural priors and biases are quite different in these architectures, the augmentation policy may not be adapted, and **possibly overfitted** considering the large amount of choices involved in their selection.
+
+![3augment](./media/3augment.png)
+
+Inspired by self-supervised learning (SSL):
+
+1. **Grayscale:** favors color invariance and give more focus on shapes
+2. **Solarization:** adds strong noise on the color to be more robust to the variation of color intensity and so focus more on shape
+3. **Gaussian Blur:** in order to slightly alter details in the image
+
+#### Simple Random Crop (SRC)
+
+![src](./media/src.png)
+
+- Random Resized Crop (RRC) is commonly used, but it introduces some discrepancy between train and test images, as mentioned in FixRes
+- RRC provides a lot of diversity and very different sizes for crops
+- RRC is relatively aggressive in terms of cropping and in many cases the labelled object is not even present in the crop
+- SRC covers a much larger fraction of the image overall and preserve the aspect ratio, but offers less diversity
+
+## Bidirectional Encoder representation from Image Transformers (BEiT)
+
+### BERT Pre-Training of Image Transformers
+
+![beit](./media/beit.png)
+
+- A masked image modeling task to pretrain ViTs
+
+## Masked Autoencoders (MAE)
+
+### Masked Autoencoders Are Scalable Vision Learners
+
 ## DINO
+
+TODO
 
 - Self-distillation with no labels
 
@@ -112,6 +182,10 @@
 ## Tokens-to-Token ViT (T2T-ViT)
 
 ## Pyramid Vision Transformer (PVT)
+
+## Class-Attention in Image Transformers (CaiT)
+
+### Going deeper with Image Transformers
 
 ## Mobile-Former
 
