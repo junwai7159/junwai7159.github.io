@@ -65,13 +65,59 @@ The major differences between ResNetV1 and ResNetV2 are as follows:
 
 ## DenseNet
 
+## ShuffleNet
+
+## SENet
+
 ## SqueezeNet
 
 ## EfficientNet
 
 ### EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks
 
+Conventional techniques of model scaling is arbitrary, it requires manual tuning and still often yields sub-optimal performance:
+
+1. Depth-wise
+2. Width-wise
+3. Scale up image resolution
+
+#### Compound Model Scaling
+
+![efficientnet_model_scaling](./media/efficientnet_model_scaling.png)
+
+$$\text{depth}: d = \alpha^{\phi}$$
+$$\text{width}: w = \beta^{\phi}$$
+$$\text{resolution}: r = \gamma^{\phi}$$
+$$\text{s.t.}~ \alpha \cdot \beta^{2} \cdot \gamma^{2} \approx 2$$
+$$\alpha \geq 1, \beta \geq 1, \gamma \geq 1$$
+
+- Use a compound coefficient $\phi$ to uniformly scale network width, depth, and resolution
+- The intuition for the network is, if the input image is bigger, them the network needs more layers to increase the receptive field and more channels to capture more fine-grained patterns on the bigger image
+- FLOPS of a regular convolution operation is proportional to $d, w^2, r^2$
+- Scaling a ConvNet will approximately increase total FLOPS by $(\alpha \cdot \beta^{2} \cdot \gamma^{2})^{\phi} \approx 2^{\phi}$
+
+#### Architecture
+
+EfficientNet-B0 is searched through neural architecture search, its architecture is similar to Mnas-Net
+
+Starting from EfficientNet-B0, scale up:
+
+1. Fix $\phi = 1$, do grid search of $\alpha, \beta, \gamma$
+2. Fix $\alpha, \beta, \gamma$, scale up the baseline network with different $\phi$
+
 ### EfficientNetV2: Smaller Models and Faster Training
+
+#### Bottlenecks of Efficient Net
+
+1. **Training with very large image sizes is slow**
+2. **Depthwise convolutions are slow in early layers**
+3. **Equally scaling up every stage is sub-optimal**
+
+#### Training-Aware NAS and Scaling
+
+#### Progressive Learning
+
+- partially inspired by curriculum learing, which schedules training examples from easy to hard
 
 ## ResNeXt
 
