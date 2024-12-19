@@ -110,14 +110,31 @@ Starting from EfficientNet-B0, scale up:
 #### Bottlenecks of Efficient Net
 
 1. **Training with very large image sizes is slow**
+   1. Smaller batch size is used, which drastically slows down the training
+   2. FixRes can be used wherby using a smaller image size for training than for inference
 2. **Depthwise convolutions are slow in early layers**
+   1. Fused-MBConv replaces the depthwise conv$3 \times 3$ and expansion conv$1 \times 1$ in MBConv with single regular conv$3 \times 3$
+   2. When applied in early stage 1-3, Fused-MBConv can improve training speed wth a small overhead on parameters and FLOPs
 3. **Equally scaling up every stage is sub-optimal**
+   1. EfficientNet equally scales up all stages using a simple compound scaling rule, yet the stages are not equally contributed to the training speed and parameter efficiency
+   2. EfficientNetV2 use a non-uniform scaling strategy to gradually add more layers to later stages
+   3. EfficientNet aggressively scale up image size, leading to large memory consumption and slow training
+   4. In EfficientNetV2, the scaling rule is slightly modified and the maximum image size is restricted to a smaller value
 
 #### Training-Aware NAS and Scaling
 
+- The NAS search space is similar to PNASNet
+- EfficientNetV2-S is scaled up to obtain EfficientNetV2-M/L using similar compound scaling as Efficient Net, with a few additional optimizations:
+  - The maximum inference image size is restricted to 480
+  - As a heuristic, more layers are added gradually to later stages
+
 #### Progressive Learning
 
-- partially inspired by curriculum learing, which schedules training examples from easy to hard
+![progressive_learning](./media/progressive_learning.webp)
+
+- Partially inspired by curriculum learing, which schedules training examples from easy to hard
+- When image size is small, it has the best accuracy with weak augmentation; but for larger images, it performs better with stronger augmentation
+- It starts with small image size and weak regularization, and then gradually increases the learning difficulty with larger image sizes and stronger regularization: larger Dropout rate, RandAugment magnitude, and mixup ratio
 
 ## ResNeXt
 

@@ -49,3 +49,5 @@ We implemeted an 3-stage Optical Character Recognition (OCR) framework for conve
 | Text Detection | Text Recognition |
 | --- | --- |
 | ![text_detection](./media/document_ocr/text_detection.png) | ![text_recognition](./media/document_ocr/text_recognition.png) |
+
+## References
