@@ -1,5 +1,7 @@
 # Data Augmentation
 
+[https://arxiv.org/pdf/2301.02830](https://arxiv.org/pdf/2301.02830)
+
 ![image_data_augmentation_taxonomy](./media/image_data_augmentation_taxonomy.png)
 
 ## Basic
@@ -81,14 +83,6 @@ Remove specific parts of an image and replacing them with either 0, 255, or the 
 4. **RSMDA:**
 5. **PuzzleMix:**
 6. **SnapMix:**
-
-##### MixUp
-
-- Generates a weighted combination of random image pairs
-
-##### CutMix
-
-- Cuts part of an image and replace it with a patch from another image
 
 ### Auto Augment
 
