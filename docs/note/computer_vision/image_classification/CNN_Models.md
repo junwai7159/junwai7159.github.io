@@ -65,6 +65,18 @@ The major differences between ResNetV1 and ResNetV2 are as follows:
 
 ## DenseNet
 
+### Densely Connected Convolutional Networks
+
+#### Architecture
+
+The key difference between ResNet and DenseNet is that in the latter case outputs are concatenated rather than added
+
+As a result, we perform a mapping from $\textbf{x}$ to its values after applying an increasingly complex sequence of functions:
+
+$$\textbf{x} \rightarrow [\textbf{x}, f_1(\textbf{x}), f_2([\textbf{x}, f_1(\textbf{x})]), f_3([\textbf{x}, f_1(\textbf{x}), f_2([\textbf{x}, f_1(\textbf{x})])]), ...]$$
+
+![densenet](./media/densenet.png)
+
 ## ShuffleNet
 
 ## SENet
