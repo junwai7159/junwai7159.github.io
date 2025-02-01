@@ -1,4 +1,4 @@
-# CV + NLP
+# Visual Language Models
 
 ## Concepts
 ### Multimodality

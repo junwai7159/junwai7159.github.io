@@ -24,6 +24,10 @@ https://www.pinecone.io/learn/series/faiss/hnsw/
 
 ### Navigable small world (NSW) graphs
 
+## FAISS
+
+- Standalone vector indices
+
 ## GraphRAG
 
 ## RAG Indexing
