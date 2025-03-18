@@ -1,3 +1,0 @@
-# Noise Remover
-
-Signal Processing

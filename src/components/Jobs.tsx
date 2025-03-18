@@ -14,7 +14,7 @@ export default function Job() {
       url: "https://wiseai.tech/",
       description: "Working on eKYC (Electronic Know-Your-Customer) solutions with Computer Vision & Large Language Models.",
       startDate: "Oct-2024",
-      endDate: null,
+      endDate: "Apr-2025",
     },
     {
       _id: "2",
